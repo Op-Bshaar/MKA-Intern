@@ -10,17 +10,16 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # allow all origins, or use ["http://localhost:3000"]
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
-# Load trained model
+
 model = joblib.load("sales_model.pkl")
 
-# Define the feature order exactly as in training
 FEATURES = [
     'Store', 'DayOfWeek', 'Promo', 'SchoolHoliday',
     'Year', 'Month', 'Day',
@@ -28,7 +27,7 @@ FEATURES = [
     'lag_1','lag_7','lag_30'
 ]
 
-# Define request schema
+
 class SalesRequest(BaseModel):
     Store: int
     DayOfWeek: int
@@ -45,7 +44,7 @@ class SalesRequest(BaseModel):
 
 @app.post("/predict")
 def predict_sales(data: SalesRequest):
-    # Build DataFrame with correct column order
+    
     X = pd.DataFrame([[
         data.Store,
         data.DayOfWeek,
@@ -61,7 +60,7 @@ def predict_sales(data: SalesRequest):
         data.lag_30
     ]], columns=FEATURES)
 
-    # Predict
+    
     prediction = model.predict(X)[0]
 
     return {"predicted_sales": float(prediction)}
