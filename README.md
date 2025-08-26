@@ -123,24 +123,25 @@ This repository contains a series of data science projects designed to help inte
 - **Learning Outcomes:** Model deployment, time series features, production-ready pipeline
 - **Hints:** Extract day of week, promo, holiday info, use lag features, integrate FastAPI or Flask
 
-#### 🛠 Steps to Run Sales Forecast Project
+# 🛠 Steps to Run Sales Forecast Project
 
-1. **Clone the repository:**
+# 1. Clone the repository
+git clone <repo-url>
+cd <repo-folder>
 
-git clone <your-repo-url>
-cd <repo-root>
-
-2. **Setup backend (FastAPI):**
-
+# 2. Setup backend (FastAPI)
 cd backend_sales
 python -m venv venv
-venv\Scripts\activate       # Windows
-# or source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate   # For Windows
+# or
+source venv/bin/activate   # For Linux/Mac
+
 python -m pip install -r requirements.txt
 uvicorn app:app --reload
 
-3. Setup frontend (Next.js): 
+# 3. Setup frontend (Next.js)
 cd frontend_sales/frontend
 npm install
 npm run dev
+
 
